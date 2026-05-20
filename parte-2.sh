@@ -1,28 +1,32 @@
-import os
-import shutil
-import time
-from datetime import datetime
+#!/bin/sh
 
-IN_DIR = os.path.join('.', 'in')
-PROCESSING_DIR = os.path.join('.', 'processing')
+# Script POSIX sh per spostare file da ./in a ./processing ogni 10 secondi
 
-os.makedirs(IN_DIR, exist_ok=True)
-os.makedirs(PROCESSING_DIR, exist_ok=True)
+set -eu
 
-print(f"Avvio script Python: controllo ogni 10 secondi la cartella '{IN_DIR}'")
+IN_DIR="./in"
+PROCESSING_DIR="./processing"
 
-while True:
-    files = [f for f in os.listdir(IN_DIR) if os.path.isfile(os.path.join(IN_DIR, f))]
+mkdir -p "$IN_DIR" "$PROCESSING_DIR"
 
-    if files:
-        for filename in files:
-            source_path = os.path.join(IN_DIR, filename)
-            dest_path = os.path.join(PROCESSING_DIR, filename)
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(f"[{timestamp}] Sposto '{filename}' in '{PROCESSING_DIR}'")
-            shutil.move(source_path, dest_path)
-    else:
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"[{timestamp}] Nessun file da spostare in '{IN_DIR}'")
+printf "Avvio script: controllo ogni 10 secondi la cartella '%s'\n" "$IN_DIR"
 
-    time.sleep(10)
+while :; do
+    files_found=0
+
+    for file in "$IN_DIR"/*; do
+        [ -e "$file" ] || continue
+        if [ -f "$file" ]; then
+            filename=$(basename "$file")
+            printf '[%s] Sposto %s in %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$filename" "$PROCESSING_DIR"
+            mv -- "$file" "$PROCESSING_DIR"/
+            files_found=1
+        fi
+    done
+
+    if [ "$files_found" -eq 0 ]; then
+        printf '[%s] Nessun file da spostare in %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$IN_DIR"
+    fi
+
+    sleep 10
+done
