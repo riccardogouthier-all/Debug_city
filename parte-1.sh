@@ -16,3 +16,4 @@ while true; do
     # Attendi 10 secondi
     sleep 10
 done
+
