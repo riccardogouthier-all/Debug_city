@@ -1,7 +1,7 @@
 '''
 3. 
 Terzo script che ogni 30 secondi controlla se ci sono 
-file nella cartella ./processing e li sposta nella cartella ./out
+file nella cartella ./2-processing e li sposta nella cartella ./3-out
 '''
 
 import os
@@ -11,9 +11,9 @@ import time
 # Determina BASE_DIR come la cartella padre di quella dello script
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(SCRIPT_DIR)
-
-PROCESSING_DIR = os.path.join(BASE_DIR, "processing")
-OUT_DIR = os.path.join(BASE_DIR, "out")
+OTHER_DIR = os.path.join(BASE_DIR, "Debug_city")
+PROCESSING_DIR = os.path.join(OTHER_DIR, "2-processing")
+OUT_DIR = os.path.join(OTHER_DIR, "3-out")
 
 os.makedirs(PROCESSING_DIR, exist_ok=True)
 os.makedirs(OUT_DIR, exist_ok=True)

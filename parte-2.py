@@ -1,7 +1,7 @@
 '''
 2. 
 Secondo script che ogni 10 secondi controlla se ci sono file 
-nella cartella ./in e li sposta nella cartella ./processing
+nella cartella ./1-in e li sposta nella cartella ./2-processing
 '''
 
 import os
@@ -9,8 +9,8 @@ import shutil
 import time
 from datetime import datetime
 
-IN_DIR = "./in"
-PROCESSING_DIR = "./processing"
+IN_DIR = "./1-in"
+PROCESSING_DIR = "./2-processing"
 
 os.makedirs(IN_DIR, exist_ok=True)
 os.makedirs(PROCESSING_DIR, exist_ok=True)
