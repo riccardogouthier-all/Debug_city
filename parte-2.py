@@ -1,3 +1,9 @@
+'''
+2. 
+Secondo script che ogni 10 secondi controlla se ci sono file 
+nella cartella ./in e li sposta nella cartella ./processing
+'''
+
 import os
 import shutil
 import time

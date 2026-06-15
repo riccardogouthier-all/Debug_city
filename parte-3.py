@@ -1,3 +1,9 @@
+'''
+3. 
+Terzo script che ogni 30 secondi controlla se ci sono 
+file nella cartella ./processing e li sposta nella cartella ./out
+'''
+
 import os
 import shutil
 import time

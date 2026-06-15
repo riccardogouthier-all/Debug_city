@@ -1,3 +1,9 @@
+'''
+1. 
+Primo script script che ogni 10 secondi scrive un file in una cartella ./in 
+(usare il timestamp per costruire il nome del file)
+'''
+
 import os
 import time
 from datetime import datetime
